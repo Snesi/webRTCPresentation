@@ -119,7 +119,7 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
 				</section>
 				<section id="mirror">
 					<h2>Mr. B: Oh! qué guapo eres!!</h2>
-                    <video data-ignore class="stretch" id="mirror-success" src=""></video>
+                    <video class="" id="mirror-success" src=""></video>
                     <img id="mirror-failed" src="" alt="" style="display: none">
 				</section>
 
@@ -426,6 +426,7 @@ Reveal.addEventListener( 'customevent', function() {
                         window.currentVideoTrack = videoTracks[0];
                         window.stream = stream; // make variable available to browser console
                         videoMirror.autoplay = true;
+                        videoMirror.classList = "stretch";
                         videoMirror.srcObject = stream;
                     }
                 })
