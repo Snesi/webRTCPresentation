@@ -119,7 +119,7 @@ function errorCallback(error) {
 navigator.getUserMedia(constraints, successCallback, errorCallback);
 					</code></pre>
 				</section>
-				<section id="mirror">
+				<section id="mirror" class="webrtc">
 					<h2>Mr. B: Oh! qué guapo eres!!</h2>
                     <div class="stretch">
                         <video class="video-mirror" id="mirror-success" src=""></video>    
@@ -127,12 +127,66 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
                     
                     <img id="mirror-failed" src="" alt="" style="display: none">
 				</section>
+                <section data-background="images/failed-mirror.gif" class="no-webrtc">
+					<h2>Mr. B: No te veo...</h2>
+				</section>
+                
+                <section>
+					<h2>MediaStream</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+// Success callback when requesting audio input stream
+function gotStream(stream) {
+    var audioContext = new AudioContext();
+
+    // Create an AudioNode from the stream
+    var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+    // Connect it to the destination or any other node for processing!
+    mediaStreamSource.connect(audioContext.destination);
+}
+
+navigator.getUserMedia({audio:true}, gotStream);
+					</code></pre>
+				</section>
+                <section id="microphone" class="webrtc">
+					<h2>Mr. B: MotherOFGod! qué voz tan bonita!</h2>
+                    <div class="stretch">
+                        <div id="meters">
+                            <div id="instant">
+                                <div class="label">Instant: </div>
+                                <meter high="0.25" max="1" value="0"></meter>
+                                <div class="value"></div>
+                            </div>
+                            <div id="slow">
+                                <div class="label">Slow: </div>
+                                <meter high="0.25" max="1" value="0"></meter>
+                                <div class="value"></div>
+                            </div>
+                            <div id="clip">
+                                <div class="label">Clip: </div>
+                                <meter max="1" value="0"></meter>
+                                <div class="value"></div>
+                            </div>
+                        </div>  
+                    </div>
+				</section>
+                <section class="no-webrtc" data-background="images/failed-microphone.gif">
+					<h2>Mr. B: Hello...? It's me...</h2>
+				</section>
+                
+                <section>
+					<h2>RTCPeerConnection</h2>
+				</section>
+                
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
         <script src="js/getusermedia.bundle.js"></script>
+        <script src="js/soundmeter.js"></script>
+        <script src="js/initaudio.js"></script>
+        
 
 		<script>
             
@@ -195,8 +249,19 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
                 console.log(event.currentSlide);
                 if(event.currentSlide.id === "mirror") {
                     showMirror(event.currentSlide);
-                } else if(typeof currentVideoTrack !== "undefined") {
+                } else if(event.currentSlide.id === "microphone") {
+                    showAudio(event.currentSlide);
+                } 
+                
+                if(typeof currentVideoTrack !== "undefined") {
                     currentVideoTrack.stop();
+                    currentVideoTrack = undefined;
+                }
+                if(typeof currentAudioTracks !== "undefined") {
+                    currentAudioTracks.forEach(function(audioTrack) {
+                        audioTrack.stop();
+                    });
+                    currentAudioTracks = undefined;
                 }
             });
 
