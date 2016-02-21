@@ -135,6 +135,18 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
         <script src="js/getusermedia.bundle.js"></script>
 
 		<script>
+            
+            var slidesToRemove = [];
+            if(navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia) {
+                slidesToRemove = document.querySelectorAll(".no-webrtc"); 
+            } else {
+                slidesToRemove = document.querySelectorAll(".webrtc");
+            }
+            
+            for(var i = 0; i < slidesToRemove.length; i++) {
+                var slideToRemove = slidesToRemove[i];
+                slideToRemove.parentElement.removeChild(slideToRemove);
+            }
 
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
@@ -164,9 +176,6 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
                         videoMirror.style.display = "none";
                         var failH2 = document.querySelector("section#mirror>h2");
                         failH2.innerText = "Mr. B: No te veo...";
-                        var failIMG = document.querySelector("#mirror-failed");
-                        failIMG.src = "images/failed-mirror.gif"
-                        failIMG.style.display = "block";
                     } else {
                         var videoTracks = stream.getVideoTracks();
                         console.log('Using video device: ' + videoTracks[0].label);

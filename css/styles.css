@@ -2,3 +2,15 @@
     width: 100%;
     height:100%;
 }
+
+#webrtc .no-webrtc {
+    display: none;
+}
+
+#no-webrtc .webrtc {
+    display: none;
+}
+
+.no-webrtc h2 {
+    color: white;
+}
