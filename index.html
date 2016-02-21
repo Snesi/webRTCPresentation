@@ -19,6 +19,8 @@
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+        
+        <link rel="stylesheet" href="css/styles.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -119,7 +121,10 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
 				</section>
 				<section id="mirror">
 					<h2>Mr. B: Oh! qué guapo eres!!</h2>
-                    <video class="" id="mirror-success" src=""></video>
+                    <div class="stretch">
+                        <video class="video-mirror" id="mirror-success" src=""></video>    
+                    </div>
+                    
                     <img id="mirror-failed" src="" alt="" style="display: none">
 				</section>
 
@@ -426,7 +431,7 @@ Reveal.addEventListener( 'customevent', function() {
                         window.currentVideoTrack = videoTracks[0];
                         window.stream = stream; // make variable available to browser console
                         videoMirror.autoplay = true;
-                        videoMirror.classList = "stretch";
+                        // videoMirror.classList = "stretch";
                         videoMirror.srcObject = stream;
                     }
                 })
