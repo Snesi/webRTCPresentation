@@ -224,9 +224,19 @@ function gotRemoteStream(e) {
 				center: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
+				multiplex: {
+			        // Example values. To generate your own, see the socket.io server instructions.
+			        secret: '14563373947558379516', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+			        id: 'c21bde26453a6e2d', // Obtained from socket.io server
+			        url: 'localhost:8086' // Location of socket.io server
+			    },
 				// Optional reveal.js plugins
 				dependencies: [
+					{ src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
+			        { src: 'plugin/multiplex/master.js', async: true },
+
+			        // and if you want speaker notes
+			        //{ src: 'plugin/notes-server/client.js', async: true }
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
