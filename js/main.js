@@ -12,9 +12,9 @@ function initSlides() {
     }
 }
 
-
+var broadcaster;
 function initWebRTC() {
-    var broadcaster = PHONE({
+    broadcaster = PHONE({
         number        : "BROADCASTER",  // If you want more than one broadcaster, use unique ids
         publish_key   : 'pub-c-f9b642ff-c435-4519-b121-78d72a7b4c5e',
         subscribe_key : 'sub-c-3e8402ec-d9a1-11e5-8758-02ee2ddab7fe',
