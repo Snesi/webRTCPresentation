@@ -65,9 +65,9 @@
 
 				<!-- Example of nested vertical slides -->
 				<section>
-                    <h2>Qué es webRTC?</h2>
+                    <h2>What is webRTC?</h2>
                     <h3>Plugin-free realtime communication</h3>
-                    <p>En resumen, tres APIs del navegador que permiten p2p entre browsers</p>
+                    <p>Three APIs that allow p2p browser communication</p>
                     <ul>
                         <li>MediaStream (aka getUserMedia)</li>
                         <li>RTCPeerConnection</li>
@@ -79,7 +79,7 @@
 					<h2>Compatibilidad?</h2>
                     <table>
                         <thead>
-                            <tr><td>SÍ</td><td>NO</td></tr>
+                            <tr><td>YES</td><td>NO</td></tr>
                         </thead>
                         <tbody>
                             <tr>
@@ -91,7 +91,7 @@
 				</section>
 
 				<section>
-					<h2>Cómo funciona?</h2>
+					<h2>How does it work?</h2>
 				</section>
 
 				<section>
@@ -120,7 +120,7 @@ navigator.getUserMedia(constraints, successCallback, errorCallback);
 					</code></pre>
 				</section>
 				<section id="mirror" class="webrtc">
-					<h2>Mr. B: Oh! qué guapo eres!!</h2>
+					<h2>Mr. B: Oh! You are such a beauty!!</h2>
                     <div class="stretch">
                         <video class="video-mirror" id="mirror-success" src=""></video>    
                     </div>
@@ -198,6 +198,10 @@ function gotRemoteStream(e) {
   attachMediaStream(remoteVideo, e.stream);
 }
 					</code></pre>
+				</section>
+                <section>
+					<h2>Hello Big-Brotha</h2>
+                    <video class="video-mirror" id="broadcaster" src="" autoplay></video>
 				</section>
 			</div>
 		</div>
