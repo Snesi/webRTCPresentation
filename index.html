@@ -286,17 +286,9 @@ function gotRemoteStream(e) {
 				center: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
-				multiplex: {
-			        // Example values. To generate your own, see the socket.io server instructions.
-			        secret: '14563373947558379516', // Obtained from the socket.io server. Gives this (the master) control of the presentation
-			        id: 'c21bde26453a6e2d', // Obtained from socket.io server
-			        url: 'https://epicdavid.com:8888' // Location of socket.io server
-			    },
+                
 				// Optional reveal.js plugins
 				dependencies: [
-					{ src: '//cdn.socket.io/socket.io-1.3.5.js', async: true },
-			        { src: 'plugin/multiplex/master.js', async: true },
-
 			        // and if you want speaker notes
 			        //{ src: 'plugin/notes-server/client.js', async: true }
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -308,7 +300,23 @@ function gotRemoteStream(e) {
 				]
 			});
             
+            var PUBNUB_demo = PUBNUB.init({
+                publish_key   : 'pub-c-f9b642ff-c435-4519-b121-78d72a7b4c5e',
+                subscribe_key : 'sub-c-3e8402ec-d9a1-11e5-8758-02ee2ddab7fe',
+            });
+            
+            PUBNUB_demo.subscribe({
+                channel: 'webrtc',
+                message: function(m){console.log(m)}
+            });
+            
             Reveal.addEventListener('slidechanged', toggleMedia);
+            Reveal.addEventListener('slidechanged', function(event) {
+                PUBNUB_demo.publish({
+                    channel: 'webrtc',
+                    message: {event: "slidechanged", msg: {slide: event.indexh}}
+                });
+            });
 
 		</script>
 
