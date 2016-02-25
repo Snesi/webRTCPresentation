@@ -310,6 +310,10 @@ function gotRemoteStream(e) {
                 message: function(m){console.log(m)}
             });
             
+            if(Reveal.getCurrentSlide().id === "big-brother") {
+                initWebRTC();
+            }
+            
             Reveal.addEventListener('slidechanged', toggleMedia);
             Reveal.addEventListener('slidechanged', function(event) {
                 PUBNUB_demo.publish({
